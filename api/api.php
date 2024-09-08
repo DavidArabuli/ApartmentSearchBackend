@@ -13,9 +13,15 @@ header('Content-Type: application/json');
 require_once '../selector.php';
 // require_once 'dbh.inc.php';
 
+if (strlen($_SERVER['QUERY_STRING']) > 200) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Query string too long']);
+    exit;
+}
+
 $params = [];
 $pagination = [
-    'page_limit' => 10,  // Default page limit
+    'page_limit' => 2,  // Default page limit
     'page' => 1          // Default page number
 ];
 
