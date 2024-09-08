@@ -1,0 +1,50 @@
+26.08.2024
+The idea is to parse SS RSS feed for apartments sales, extract data, populate database, create API endpoints, read incoming requests with query parameters, and send Json back.
+
+First version is gonna be Riga apartments sales.
+Later might add other types of deals. Should be straightforward to add new RSS link and read from it too. Most of the classes would be reusable, with minor tweaks (mostly related to price and district data). 
+
+---
+Parsing challenge: 
+SS RSS feed is a mess, filled with all kind tags, symbols, duplication etc.
+So it is not as handy as normal XML. Lots of info is sitting in "description" node - everything mixed up. links, tags, hrefs,  prices, currency symbols.
+
+27.08.2024
+Parser is coming together, moved it to separate class. Not pretty atm, but it works fine.
+- Added hashing to avoid duplication of advertisements. 
+- several tweaks on cleaning data for DB. 
+
+28.08.2024
+Parsing and populating DB is going forward, have to add small extras, like link to apartment image, and change date format.
+Currently using SQLite. 
+Might switch to MariaDB or MySql later. Have to decide on how many entries to keep in DB. 
+Have to clarify how fast ads expire and how relevant it would be to keep data about ads older than a month..
+
+29.08.2024
+Reading from GET request URL queries and selecting data is mostly done.
+Probably will replicate the whole SS.lv functionality in regards to filters - so min-max m2, price, floors.
+
+I have a setup that works fine in the local environment. Every query is working, json returned is correct.
+Api.php may need some tweaks with headers and some overall config settings might change for hosting, but functionally the API working as intended.
+
+Added some foundation for analytics.
+- have to think, what kind of analytics might be relevant and useful for potential apartment purchase.
+Currently have "averages" calculated for m2 and prices.
+Might add some 'increase\decrease over month' later.
+
+Will move to frontend for now.
+
+
+1.09.2024
+
+pagination added on the backend.
+
+6.09.2024
+Districts are now gathered from DB and are accessible through API, so that on a frontend I can get only relevant districts.
+
+7.09.2024
+Actually, pagination is kind of messed up, because my frontend has no idea, whether I have more results in DB, or just the default 10 entries on first page.
+I have to either send some clue, or  link to the next page, or massage the data before json is created on API page. Which will probably be the most straightforward way...
+I believe mainSelector method in Selector class shouldn`t do anything with data in terms of offset and limits, better to do it separately. 
+
+Removed selection logic from DB queries. Now sending response that gives frontend idea on how many pages there are, what is current page, etc. 
