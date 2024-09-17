@@ -48,3 +48,10 @@ I have to either send some clue, or  link to the next page, or massage the data 
 I believe mainSelector method in Selector class shouldn`t do anything with data in terms of offset and limits, better to do it separately. 
 
 Removed selection logic from DB queries. Now sending response that gives frontend idea on how many pages there are, what is current page, etc. 
+
+9.09.2024
+Added more analytics
+Added more validation into URL query
+
+14.09.2024 
+another analytics options for API

@@ -1,14 +1,9 @@
 <?php
 
 header("Access-Control-Allow-Origin: *");
-
-
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-
-
 header("Access-Control-Allow-Headers: Content-Type");
 header('Content-Type: application/json');
-
 
 require_once '../selector.php';
 // require_once 'dbh.inc.php';
@@ -25,36 +20,29 @@ $pagination = [
     'page' => 1          // Default page number
 ];
 
-if (isset($_GET['istabas'])) {
-    $params['istabas'] = $_GET['istabas'];
-}
-if (isset($_GET['pagasts'])) {
-    $params['pagasts'] = $_GET['pagasts'];
-}
-if (isset($_GET['m2_min'])) {
-    $params['m2_min'] = $_GET['m2_min'];
-}
-if (isset($_GET['m2_max'])) {
-    $params['m2_max'] = $_GET['m2_max'];
-}
-if (isset($_GET['cena_min'])) {
-    $params['cena_min'] = $_GET['cena_min'];
-}
-if (isset($_GET['cena_max'])) {
-    $params['cena_max'] = $_GET['cena_max'];
-}
-if (isset($_GET['stavs_min'])) {
-    $params['stavs_min'] = $_GET['stavs_min'];
-}
-if (isset($_GET['stavs_max'])) {
-    $params['stavs_max'] = $_GET['stavs_max'];
-}
-if (isset($_GET['page_limit'])) {
-    $pagination['page_limit'] = $_GET['page_limit'];
-}
-if (isset($_GET['page'])) {
-    $pagination['page'] = $_GET['page'];
-}
+// Sanitize and validate inputs
+$params['istabas'] = isset($_GET['istabas']) ? filter_var($_GET['istabas'], FILTER_VALIDATE_INT) : null;
+
+$params['pagasts'] = isset($_GET['pagasts']) ? htmlspecialchars($_GET['pagasts'], ENT_QUOTES, 'UTF-8') : null;
+
+$params['m2_min'] = isset($_GET['m2_min']) ? filter_var($_GET['m2_min'], FILTER_VALIDATE_INT) : null;
+
+$params['m2_max'] = isset($_GET['m2_max']) ? filter_var($_GET['m2_max'], FILTER_VALIDATE_INT) : null;
+
+$params['cena_min'] = isset($_GET['cena_min']) ? filter_var($_GET['cena_min'], FILTER_VALIDATE_INT) : null;
+
+$params['cena_max'] = isset($_GET['cena_max']) ? filter_var($_GET['cena_max'], FILTER_VALIDATE_INT) : null;
+
+$params['stavs_min'] = isset($_GET['stavs_min']) ? filter_var($_GET['stavs_min'], FILTER_VALIDATE_INT) : null;
+
+$params['stavs_max'] = isset($_GET['stavs_max']) ? filter_var($_GET['stavs_max'], FILTER_VALIDATE_INT) : null;
+
+// Validate and sanitize 'page_limit' and 'page'
+$pagination['page_limit'] = isset($_GET['page_limit']) ? (int)$_GET['page_limit'] : 4;
+$pagination['page_limit'] = $pagination['page_limit'] > 0 && $pagination['page_limit'] <= 100 ? $pagination['page_limit'] : 2;
+
+$pagination['page'] = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$pagination['page'] = max(1, $pagination['page']);  // Ensure page is at least 1
 
 $selection = new Selector($pdo);
 $mainQuery = $selection->mainSelector($params);
