@@ -7,7 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-cache/analytics.json
+analytics.json
 node_modules
 dist
 dist-ssr
