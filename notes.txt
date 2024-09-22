@@ -55,3 +55,19 @@ Added more validation into URL query
 
 14.09.2024 
 another analytics options for API
+
+19-23.09.2024
+Notification functionality
+The goal is to make it possible for user to send a request to track new entries in DB and compare to desired apartment.
+I don`t want to compare against whole DB, as it might get significantly bigger as time goes, so check will be performed only against new entries.
+Existing entries can be filtered by search functionality anyway.
+Once there is a match, notification will be sent.
+
+It will be email notification. A full procedure:
+- on frontend user fills a form with apartment params and email.
+- on backend POST request is met. 
+- check whether email is registered in DB already
+- make user verify email
+- compare all new parsed entries with user params
+- send email with link to apartment on SS.lv when there is a match.
+
