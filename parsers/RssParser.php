@@ -1,6 +1,6 @@
 <?php
 
-class dataGatherer
+class RssParser
 {
 
     private $object;
@@ -90,7 +90,7 @@ class dataGatherer
 
 
             $hash = $this->createHash($title, $pubDate);
-            $dbHandle = new DbHandler($title, $imgSrc, $pagasts, $stavs, $serija, $cena, $m2, $istabas, $iela, $pubDate, $link, $hash);
+            $dbHandle = new Listing($title, $imgSrc, $pagasts, $stavs, $serija, $cena, $m2, $istabas, $iela, $pubDate, $link, $hash);
             $dbHandle->insertInDb();
 
             echo '<p>Hash:' . $hash;

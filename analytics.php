@@ -72,9 +72,9 @@ class Analytics
     public function listSalesDistrict()
     {
         $query = "SELECT pagasts, COUNT(*) AS offer_count
-             FROM ss_rss_riga
-             GROUP BY pagasts
-             ORDER BY offer_count DESC;";
+            FROM ss_rss_riga
+            GROUP BY pagasts
+            ORDER BY offer_count DESC;";
 
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();

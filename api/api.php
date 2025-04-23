@@ -37,7 +37,7 @@ $params['stavs_min'] = isset($_GET['stavs_min']) ? filter_var($_GET['stavs_min']
 
 $params['stavs_max'] = isset($_GET['stavs_max']) ? filter_var($_GET['stavs_max'], FILTER_VALIDATE_INT) : null;
 
-// Validate and sanitize 'page_limit' and 'page'
+// Validate and sanitize 'page_limit' and 'page', or set defaults.
 $pagination['page_limit'] = isset($_GET['page_limit']) ? (int)$_GET['page_limit'] : 4;
 $pagination['page_limit'] = $pagination['page_limit'] > 0 && $pagination['page_limit'] <= 100 ? $pagination['page_limit'] : 2;
 

@@ -71,3 +71,4 @@ It will be email notification. A full procedure:
 - compare all new parsed entries with user params
 - send email with link to apartment on SS.lv when there is a match.
 
+- Question is, whether to keep notifications params as Json like text, or to split params coming from frontend into fields in DB, and have "min_m2", "max_stavs"  etc...

@@ -21,9 +21,11 @@ $feed_url = "data.xml";
         <br>
         <?php
         require_once "insert.php";
-        require_once "dbh.inc.php";
-        require_once "dataGatherer.php";
-        $gather = new dataGatherer($feed_url);
+        // require_once "dbh.inc.php";
+        require_once __DIR__ . '/../config/dbh.inc.php';
+
+        require_once "RssParser.php";
+        $gather = new RssParser($feed_url);
         $gather->gatherData();
         ?>
     </div>

@@ -8,7 +8,7 @@ echo 'Request method: ' . $_SERVER['REQUEST_METHOD'] . "\n";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Log all incoming POST data
-    var_dump($_POST);
+    // var_dump($_POST);
 
     $params['istabas'] = isset($_POST['istabas']) ? filter_var($_POST['istabas'], FILTER_VALIDATE_INT) : null;
 
@@ -43,4 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['error' => 'Email and email confirmation is required!']);
         exit;
     }
+    echo '<pre>';
+    var_dump($params);
+    echo '</pre>';
+    return $params;
 }

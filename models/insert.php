@@ -1,7 +1,7 @@
 <?php
 echo "Hello from insert";
 
-class DbHandler
+class Listing
 {
     private $title;
     private $imgSrc;
@@ -34,11 +34,13 @@ class DbHandler
     }
     public function insertInDb()
     {
-        require_once "dbh.inc.php";
+        // require_once "dbh.inc.php";
+        require_once __DIR__ . '/../config/dbh.inc.php';
+
         global $pdo;
         try {
 
-            $query = "INSERT INTO ss_rss_riga (title, imgSrc, pagasts, stavs, serija, cena, m2, istabas, iela, pub_date, link, hash) VALUES (:title, :imgSrc, :pagasts, :stavs, :serija, :cena, :m2, :istabas, :iela, :pubDate, :link, :hash);";
+            $query = "INSERT INTO listings (title, imgSrc, district, floor, series, price, m2, rooms, street, pubDate, link, hash) VALUES (:title, :imgSrc, :pagasts, :stavs, :serija, :cena, :m2, :istabas, :iela, :pubDate, :link, :hash);";
 
             $stmt = $pdo->prepare($query);
 

@@ -15,7 +15,7 @@ class Selector
 
 
         try {
-            $baseSelectQuery = "SELECT * FROM ss_rss_riga ";
+            $baseSelectQuery = "SELECT * FROM listings ";
             $conditions = [];
             $bindings = [];
 
