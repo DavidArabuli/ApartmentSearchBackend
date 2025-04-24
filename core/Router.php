@@ -1,38 +1,43 @@
 <?php
 
+// require '../controllers/APIController.php';
+
 class Router
 {
 
     protected $routes = [];
 
-    public function addRoute($method, $uri, $controller)
+    public function addRoute($method, $uri, $action)
     {
         $this->routes[] = [
             'uri' => $uri,
-            'controller' => $controller,
+            'action' => $action,
             'method' => $method
         ];
     }
-    public function get($uri, $controller)
+    public function get($uri, $action)
     {
-        $this->addRoute('GET', $uri, $controller);
+        $this->addRoute('GET', $uri, $action);
     }
-    public function post($uri, $controller)
+    public function post($uri, $action)
     {
-        $this->addRoute("POST", $uri, $controller);
+        $this->addRoute("POST", $uri, $action);
     }
 
-    public function delete($uri, $controller)
+    public function delete($uri, $action)
     {
-        $this->addRoute("DELETE", $uri, $controller);
+        $this->addRoute("DELETE", $uri, $action);
     }
 
     public function route($uri, $method)
     {
         foreach ($this->routes as $route) {
             if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
-                // return 'hey there';
-                return require '../controllers/' . $route['controller'];
+                if (is_callable($route['action'])) {
+                    return $route['action']();
+                }
+
+                return require '../controllers/' . $route['action'];
             }
         }
         $this->abort();

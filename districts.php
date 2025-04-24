@@ -11,11 +11,11 @@ class Districts
 
     public function getDistricts()
     {
-        $query = "SELECT pagasts FROM ss_rss_riga;";
+        $query = "SELECT district FROM listings;";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $pagastsArray = array_column($results, 'pagasts');
+        $pagastsArray = array_column($results, 'district');
         $uniqueResults = array_unique($pagastsArray);
 
 

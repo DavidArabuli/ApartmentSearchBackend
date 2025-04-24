@@ -1,8 +1,9 @@
 <?php
-echo "Hello from insert";
+// echo "Hello from insert";
 
 class Listing
 {
+    private const TABLE = 'listings';
     // private $title;
     // private $imgSrc;
     // private $pagasts;
@@ -45,7 +46,7 @@ class Listing
         // global $pdo;
         try {
 
-            $query = "INSERT INTO listings (title, imgSrc, district, floor, series, price, m2, rooms, street, pubDate, link, hash) VALUES (:title, :imgSrc, :pagasts, :stavs, :serija, :cena, :m2, :istabas, :iela, :pubDate, :link, :hash);";
+            $query = "INSERT INTO " . self::TABLE . " (title, imgSrc, district, floor, series, price, m2, rooms, street, pubDate, link, hash) VALUES (:title, :imgSrc, :pagasts, :stavs, :serija, :cena, :m2, :istabas, :iela, :pubDate, :link, :hash);";
 
             $stmt = $this->pdo->prepare($query);
 

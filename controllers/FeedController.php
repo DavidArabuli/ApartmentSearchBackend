@@ -31,6 +31,6 @@ class FeedController
         }
     }
 }
-
-$controller = new FeedController($pdo);
-$controller->updateFeed('../data.xml');
+// echo 'hey feed conroller';
+// $controller = new FeedController($pdo);
+// $controller->updateFeed('../data.xml');
