@@ -2,12 +2,12 @@
 
 require '../core/Router.php';
 
-function dd($data)
-{
-    echo '<pre>';
-    die(var_dump($data));
-    echo '</pre>';
-}
+// function dd($data)
+// {
+//     echo '<pre>';
+//     die(var_dump($data));
+//     echo '</pre>';
+// }
 $router = new Router;
 
 $routes = require '../views/routes.php';

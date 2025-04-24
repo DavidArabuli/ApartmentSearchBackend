@@ -19,15 +19,7 @@ $feed_url = "data.xml";
         <br>
         <h2>RSS feed</h2>
         <br>
-        <?php
-        require_once "insert.php";
-        // require_once "dbh.inc.php";
-        require_once __DIR__ . '/../config/dbh.inc.php';
 
-        require_once "RssParser.php";
-        $gather = new RssParser($feed_url);
-        $gather->gatherData();
-        ?>
     </div>
 </body>
 

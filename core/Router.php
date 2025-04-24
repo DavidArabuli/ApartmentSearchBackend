@@ -34,8 +34,8 @@ class Router
                 // return 'hey there';
                 return require '../controllers/' . $route['controller'];
             }
-            $this->abort();
         }
+        $this->abort();
     }
 
     public function abort($code = 404)

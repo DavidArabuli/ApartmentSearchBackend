@@ -1,5 +1,10 @@
 <?php
-
+function dd($data)
+{
+    echo '<pre>';
+    die(var_dump($data));
+    echo '</pre>';
+}
 class RssParser
 {
 
@@ -11,15 +16,21 @@ class RssParser
         $this->object->load($feed_url);
     }
 
-    public function gatherData()
+
+    public function parse()
     {
+
+        $items = [];
 
         $content = $this->object->getElementsByTagName('item');
 
         foreach ($content as $row) {
+
             $title = trim($row->getElementsByTagName('title')->item(0)->nodeValue);
             $description = $row->getElementsByTagName("description")->item(0)->nodeValue;
-            $pubDate = $row->getElementsByTagName("pubDate")->item(0)->nodeValue;
+            $pubDateRaw = $row->getElementsByTagName("pubDate")->item(0)->nodeValue;
+            $pubDate = (new DateTime($pubDateRaw))->format('Y-m-d H:i:s');
+            // $pubDate = $row->getElementsByTagName("pubDate")->item(0)->nodeValue;
             $link = $row->getElementsByTagName("link")->item(0)->nodeValue;
 
             // Replace <br> and <br/> with newlines - because of specifics of description field
@@ -27,36 +38,42 @@ class RssParser
 
             // Split description by newline characters
             $lines = explode("\n", $description);
-
+            // print_r($title);
             echo '<pre>';
             var_dump($lines);
             echo '</pre>';
 
+            $data = [
+                // 'description' => $description,
+                'title' => $title,
+                'pubDate' => $pubDate,
+                'link' => $link,
+                'pagasts' => '',
+                'stavs' => '',
+                'serija' => '',
+                'cena' => '',
+                'm2' => '',
+                'istabas' => '',
+                'iela' => '',
+                'imgSrc' => '',
+                'hash' => '',
+            ];
 
-            $pagasts = '';
-            $stavs = '';
-            $serija = '';
-            $cena = '';
-            $m2 = '';
-            $istabas = '';
-            $iela = '';
-            $imgSrc = '';
-
-
+            // dd($data);
 
             foreach ($lines as $line) {
                 if (strpos($line, 'Pagasts:') !== false) {
 
-                    $pagasts = strip_tags(trim($this->extractValue($line, 'Pagasts:')));
+                    $data['pagasts'] = strip_tags(trim($this->extractValue($line, 'Pagasts:')));
                 }
                 if (strpos($line, 'Stāvs:') !== false) {
 
-                    $stavs = strip_tags(trim($this->extractValue($line, 'Stāvs:')));
+                    $data['stavs'] = strip_tags(trim($this->extractValue($line, 'Stāvs:')));
                 }
 
                 if (strpos($line, 'Sērija:') !== false) {
 
-                    $serija = strip_tags(trim($this->extractValue($line, 'Sērija:')));
+                    $data['serija'] = strip_tags(trim($this->extractValue($line, 'Sērija:')));
                 }
 
                 if (strpos($line, 'Cena:') !== false) {
@@ -67,34 +84,32 @@ class RssParser
                     $cena = preg_replace('/[^\d,\.]/', '', $rawPrice);
 
 
-                    $cena = str_replace(',', '', $cena);
+                    $data['cena'] = str_replace(',', '', $cena);
                 }
 
 
                 if (strpos($line, 'm2:') !== false) {
 
-                    $m2 = strip_tags(trim($this->extractValue($line, 'm2:')));
+                    $data['m2'] = strip_tags(trim($this->extractValue($line, 'm2:')));
                 }
                 if (strpos($line, 'Ist.:') !== false) {
 
-                    $istabas = strip_tags(trim($this->extractValue($line, 'Ist.:')));
+                    $data['istabas'] = strip_tags(trim($this->extractValue($line, 'Ist.:')));
                 }
                 if (strpos($line, 'Iela:') !== false) {
 
-                    $iela = $this->removeDuplicateWords(strip_tags(trim($this->extractValue($line, 'Iela:'))));
+                    $data['iela'] = $this->removeDuplicateWords(strip_tags(trim($this->extractValue($line, 'Iela:'))));
                 }
                 if (strpos($line, '<img') !== false) {
-                    $imgSrc = $this->extractImageSrc($line);
+                    $data['imgSrc'] = $this->extractImageSrc($line);
                 }
             }
 
 
-            $hash = $this->createHash($title, $pubDate);
-            $dbHandle = new Listing($title, $imgSrc, $pagasts, $stavs, $serija, $cena, $m2, $istabas, $iela, $pubDate, $link, $hash);
-            $dbHandle->insertInDb();
-
-            echo '<p>Hash:' . $hash;
+            $data['hash'] = $this->createHash($title, $pubDate);
+            $items[] = $data;
         }
+        return $items;
 
         /**
          * Helper functions
