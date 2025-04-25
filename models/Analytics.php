@@ -27,7 +27,7 @@ class Analytics
     }
     public function averageM2Price()
     {
-        $query = "SELECT AVG(cena / m2) AS averageM2Price FROM " . self::TABLE . ";";
+        $query = "SELECT AVG(price / m2) AS averageM2Price FROM " . self::TABLE . ";";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
 
@@ -38,11 +38,11 @@ class Analytics
     // average appartement price in DB
     public function averagePrice()
     {
-        $query = "SELECT cena FROM " . self::TABLE . ";";
+        $query = "SELECT price FROM " . self::TABLE . ";";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $values  = array_column($results, 'cena');
+        $values  = array_column($results, 'price');
         $sum = array_sum($values);
         $count = count($values);
         $average = round($sum / $count, 2);
@@ -54,23 +54,23 @@ class Analytics
     }
     public function highestPrice()
     {
-        $query = "SELECT MAX(cena) as highestPrice FROM " . self::TABLE . ";";
+        $query = "SELECT MAX(price) as highestPrice FROM " . self::TABLE . ";";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function lowestPrice()
     {
-        $query = "SELECT MIN(cena) as lowestPrice FROM " . self::TABLE . ";";
+        $query = "SELECT MIN(price) as lowestPrice FROM " . self::TABLE . ";";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function listSalesDistrict()
     {
-        $query = "SELECT pagasts, COUNT(*) AS offer_count
+        $query = "SELECT district, COUNT(*) AS offer_count
             FROM listings
-            GROUP BY pagasts
+            GROUP BY district
             ORDER BY offer_count DESC;";
 
         $stmt = $this->pdo->prepare($query);
@@ -79,9 +79,9 @@ class Analytics
     }
     public function lowestAveragePriceDistrict()
     {
-        $query = "SELECT pagasts, AVG(cena) AS average_price
-            FROM listings
-            GROUP BY pagasts
+        $query = "SELECT district, AVG(price) AS average_price
+            FROM " . self::TABLE . "
+            GROUP BY district
             ORDER BY average_price ASC;";
 
         $stmt = $this->pdo->prepare($query);
@@ -90,10 +90,10 @@ class Analytics
     }
     public function averageM2PriceByDistrict()
     {
-        $query = "SELECT pagasts, AVG(cena / NULLIF(m2, 0)) AS average_m2_price_by_district
+        $query = "SELECT district, AVG(price / NULLIF(m2, 0)) AS average_m2_price_by_district
         FROM listings
         WHERE m2 > 0
-        GROUP BY pagasts
+        GROUP BY district
         ORDER BY average_m2_price_by_district ASC;";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();

@@ -4,7 +4,7 @@
 require_once '../config/dbh.inc.php';
 
 // echo 'hey from API controller';
-class APIController
+class DistrictsController
 {
 
     private $pdo;
@@ -13,24 +13,24 @@ class APIController
         $this->pdo = $pdo;
     }
 
-    public function getAnalytics()
-    {
-        header("Access-Control-Allow-Origin: *");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-        header("Access-Control-Allow-Headers: Content-Type");
-        header('Content-Type: application/json; charset=utf-8');
+    // public function getAnalytics()
+    // {
+    //     header("Access-Control-Allow-Origin: *");
+    //     header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+    //     header("Access-Control-Allow-Headers: Content-Type");
+    //     header('Content-Type: application/json; charset=utf-8');
 
-        try {
-        } catch (Exception $e) {
-            http_response_code(500);
-            echo json_encode([
-                'status' => 'error',
-                'message' => 'failed to fetch analytics',
-                'error' => $e->getMessage()
-            ]);
-        }
-    }
-    public function getDistricts()
+    //     try {
+    //     } catch (Exception $e) {
+    //         http_response_code(500);
+    //         echo json_encode([
+    //             'status' => 'error',
+    //             'message' => 'failed to fetch analytics',
+    //             'error' => $e->getMessage()
+    //         ]);
+    //     }
+    // }
+    public function show()
     {
         header("Access-Control-Allow-Origin: *");
         header("Access-Control-Allow-Methods: GET, POST, OPTIONS");

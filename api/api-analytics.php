@@ -4,10 +4,11 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header('Content-Type: application/json');
 
+require_once '../analytics.php';
+
 $cacheFile = 'cache/analytics.json';
 $cacheTime = 900; // 15 minutes 
 
-require_once '../analytics.php';
 
 if (file_exists($cacheFile)) {
 

@@ -1,0 +1,261 @@
+{
+    "averageM2": {
+        "averageM2": 62.48
+    },
+    "averagePrice": {
+        "averagePrice": 105443.82
+    },
+    "highestPrice": {
+        "highestPrice": 386000
+    },
+    "lowestPrice": {
+        "lowestPrice": 22000
+    },
+    "averageM2Price": 1632.57,
+    "mostSalesDistrict": [
+        {
+            "district": "centrs",
+            "offer_count": 26
+        },
+        {
+            "district": "Imanta",
+            "offer_count": 6
+        },
+        {
+            "district": "Āgenskalns",
+            "offer_count": 5
+        },
+        {
+            "district": "Purvciems",
+            "offer_count": 3
+        },
+        {
+            "district": "Pļavnieki",
+            "offer_count": 3
+        },
+        {
+            "district": "Teika",
+            "offer_count": 2
+        },
+        {
+            "district": "Ķengarags",
+            "offer_count": 2
+        },
+        {
+            "district": "Zolitūde",
+            "offer_count": 2
+        },
+        {
+            "district": "Iļģuciems",
+            "offer_count": 1
+        },
+        {
+            "district": "Vecāķi",
+            "offer_count": 1
+        },
+        {
+            "district": "Bolderāja",
+            "offer_count": 1
+        },
+        {
+            "district": "Mežciems",
+            "offer_count": 1
+        },
+        {
+            "district": "Čiekurkalns",
+            "offer_count": 1
+        },
+        {
+            "district": "Jugla",
+            "offer_count": 1
+        },
+        {
+            "district": "Ziepniekkalns",
+            "offer_count": 1
+        },
+        {
+            "district": "Mežaparks",
+            "offer_count": 1
+        },
+        {
+            "district": "Klīversala",
+            "offer_count": 1
+        },
+        {
+            "district": "Krasta r-ns",
+            "offer_count": 1
+        },
+        {
+            "district": "Sarkandaugava",
+            "offer_count": 1
+        },
+        {
+            "district": "Torņakalns",
+            "offer_count": 1
+        }
+    ],
+    "lowestAveragePriceDistrict": [
+        {
+            "district": "Ķengarags",
+            "average_price": "28500.0000"
+        },
+        {
+            "district": "Pļavnieki",
+            "average_price": "31133.3333"
+        },
+        {
+            "district": "Bolderāja",
+            "average_price": "48000.0000"
+        },
+        {
+            "district": "Teika",
+            "average_price": "50000.0000"
+        },
+        {
+            "district": "Jugla",
+            "average_price": "50000.0000"
+        },
+        {
+            "district": "Sarkandaugava",
+            "average_price": "52800.0000"
+        },
+        {
+            "district": "Imanta",
+            "average_price": "53083.3333"
+        },
+        {
+            "district": "Iļģuciems",
+            "average_price": "67000.0000"
+        },
+        {
+            "district": "Mežciems",
+            "average_price": "69300.0000"
+        },
+        {
+            "district": "Purvciems",
+            "average_price": "83666.6667"
+        },
+        {
+            "district": "Torņakalns",
+            "average_price": "89900.0000"
+        },
+        {
+            "district": "Mežaparks",
+            "average_price": "94000.0000"
+        },
+        {
+            "district": "Čiekurkalns",
+            "average_price": "99330.0000"
+        },
+        {
+            "district": "Ziepniekkalns",
+            "average_price": "109000.0000"
+        },
+        {
+            "district": "centrs",
+            "average_price": "117497.8077"
+        },
+        {
+            "district": "Zolitūde",
+            "average_price": "138500.0000"
+        },
+        {
+            "district": "Krasta r-ns",
+            "average_price": "144000.0000"
+        },
+        {
+            "district": "Āgenskalns",
+            "average_price": "188580.0000"
+        },
+        {
+            "district": "Klīversala",
+            "average_price": "249000.0000"
+        },
+        {
+            "district": "Vecāķi",
+            "average_price": "265000.0000"
+        }
+    ],
+    "averageM2PriceByDistrict": [
+        {
+            "district": "Ķengarags",
+            "average_m2_price_by_district": 635.8536585365854
+        },
+        {
+            "district": "Imanta",
+            "average_m2_price_by_district": 883.4421273062959
+        },
+        {
+            "district": "Bolderāja",
+            "average_m2_price_by_district": 923.0769230769231
+        },
+        {
+            "district": "Pļavnieki",
+            "average_m2_price_by_district": 927.2625448028674
+        },
+        {
+            "district": "Iļģuciems",
+            "average_m2_price_by_district": 943.6619718309859
+        },
+        {
+            "district": "Jugla",
+            "average_m2_price_by_district": 1063.8297872340424
+        },
+        {
+            "district": "Mežciems",
+            "average_m2_price_by_district": 1100
+        },
+        {
+            "district": "Sarkandaugava",
+            "average_m2_price_by_district": 1389.4736842105262
+        },
+        {
+            "district": "Purvciems",
+            "average_m2_price_by_district": 1474.5539906103286
+        },
+        {
+            "district": "Čiekurkalns",
+            "average_m2_price_by_district": 1505
+        },
+        {
+            "district": "Zolitūde",
+            "average_m2_price_by_district": 1575.2100840336134
+        },
+        {
+            "district": "Teika",
+            "average_m2_price_by_district": 1620.4545454545455
+        },
+        {
+            "district": "Torņakalns",
+            "average_m2_price_by_district": 1634.5454545454545
+        },
+        {
+            "district": "centrs",
+            "average_m2_price_by_district": 1764.682042675226
+        },
+        {
+            "district": "Krasta r-ns",
+            "average_m2_price_by_district": 1972.6027397260275
+        },
+        {
+            "district": "Ziepniekkalns",
+            "average_m2_price_by_district": 1981.8181818181818
+        },
+        {
+            "district": "Āgenskalns",
+            "average_m2_price_by_district": 2471.686970012791
+        },
+        {
+            "district": "Mežaparks",
+            "average_m2_price_by_district": 2685.714285714286
+        },
+        {
+            "district": "Vecāķi",
+            "average_m2_price_by_district": 2977.5280898876404
+        },
+        {
+            "district": "Klīversala",
+            "average_m2_price_by_district": 3000
+        }
+    ]
+}
