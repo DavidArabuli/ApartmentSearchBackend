@@ -1,5 +1,5 @@
 <?php
-require_once 'dbh.inc.php';
+// require_once 'dbh.inc.php';
 class Analytics
 {
     private const TABLE = 'listings';
@@ -57,18 +57,14 @@ class Analytics
         $query = "SELECT MAX(cena) as highestPrice FROM " . self::TABLE . ";";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        $results = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        return $results;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function lowestPrice()
     {
         $query = "SELECT MIN(cena) as lowestPrice FROM " . self::TABLE . ";";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        $results = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        return $results;
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function listSalesDistrict()
     {
@@ -79,9 +75,7 @@ class Analytics
 
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        return $results;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public function lowestAveragePriceDistrict()
     {
@@ -92,9 +86,7 @@ class Analytics
 
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        return $results;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public function averageM2PriceByDistrict()
     {
@@ -106,8 +98,7 @@ class Analytics
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
 
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $averageM2PriceByDistrict = $result;
+        $averageM2PriceByDistrict = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $averageM2PriceByDistrict;
     }
 }
