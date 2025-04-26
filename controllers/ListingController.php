@@ -1,12 +1,12 @@
 <?php
 
-// class ListingController
-// {
+class ListingController
+{
 
-//     private Listing $listing;
+    private Listing $listing;
 
-//     public function __construct(PDO $pdo)
-//     {
-//         $this->listing = new Listing();
-//     }
-// }
+    public function __construct(PDO $pdo)
+    {
+        $this->listing = new Listing($pdo);
+    }
+}

@@ -3,18 +3,19 @@
 class Listing
 {
     private $table;
-    private $data;
+    // private $data;
     private $pdo;
 
 
 
-    public function __construct(array $data, PDO $pdo, string $table = 'listings')
+    public function __construct(PDO $pdo, string $table = 'listings')
     {
-        $this->data = $data;
+        // $this->data = $data;
         $this->pdo = $pdo;
         $this->table = $table;
     }
-    public function mainSelector(array $params)
+
+    public function select(array $params)
     {
 
 
@@ -76,7 +77,7 @@ class Listing
         }
     }
 
-    public function insertInDb()
+    public function insertInDb(array $data)
     {
         // require_once "dbh.inc.php";
         require_once __DIR__ . '/../config/dbh.inc.php';
@@ -88,18 +89,18 @@ class Listing
 
             $stmt = $this->pdo->prepare($query);
 
-            $stmt->bindParam(":title", $this->data['title']);
-            $stmt->bindParam(":imgSrc", $this->data['imgSrc']);
-            $stmt->bindParam(":pagasts", $this->data['pagasts']);
-            $stmt->bindParam(":stavs", $this->data['stavs']);
-            $stmt->bindParam(":serija", $this->data['serija']);
-            $stmt->bindParam(":cena", $this->data['cena']);
-            $stmt->bindParam(":m2", $this->data['m2']);
-            $stmt->bindParam(":istabas", $this->data['istabas']);
-            $stmt->bindParam(":iela", $this->data['iela']);
-            $stmt->bindParam(":pubDate", $this->data['pubDate']);
-            $stmt->bindParam(":link", $this->data['link']);
-            $stmt->bindParam(":hash", $this->data['hash']);
+            $stmt->bindParam(":title", $data['title']);
+            $stmt->bindParam(":imgSrc", $data['imgSrc']);
+            $stmt->bindParam(":pagasts", $data['pagasts']);
+            $stmt->bindParam(":stavs", $data['stavs']);
+            $stmt->bindParam(":serija", $data['serija']);
+            $stmt->bindParam(":cena", $data['cena']);
+            $stmt->bindParam(":m2", $data['m2']);
+            $stmt->bindParam(":istabas", $data['istabas']);
+            $stmt->bindParam(":iela", $data['iela']);
+            $stmt->bindParam(":pubDate", $data['pubDate']);
+            $stmt->bindParam(":link", $data['link']);
+            $stmt->bindParam(":hash", $data['hash']);
             $stmt->execute();
 
             // $pdo = null;
