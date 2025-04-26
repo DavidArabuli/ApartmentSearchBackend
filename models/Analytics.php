@@ -1,18 +1,19 @@
 <?php
-// require_once 'dbh.inc.php';
+
 class Analytics
 {
-    private const TABLE = 'listings';
+    private $table;
     private $pdo;
 
-    public function __construct($pdo)
+    public function __construct(PDO $pdo, string $table = 'listings')
     {
         $this->pdo = $pdo;
+        $this->table = $table;
     }
     // average m2 in database
     public function averageM2()
     {
-        $query = "SELECT m2 FROM " . self::TABLE . ";";
+        $query = "SELECT m2 FROM {$this->table};";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -27,7 +28,7 @@ class Analytics
     }
     public function averageM2Price()
     {
-        $query = "SELECT AVG(price / m2) AS averageM2Price FROM " . self::TABLE . ";";
+        $query = "SELECT AVG(price / m2) AS averageM2Price FROM {$this->table};";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
 
@@ -38,7 +39,7 @@ class Analytics
     // average appartement price in DB
     public function averagePrice()
     {
-        $query = "SELECT price FROM " . self::TABLE . ";";
+        $query = "SELECT price FROM {$this->table};";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -54,14 +55,14 @@ class Analytics
     }
     public function highestPrice()
     {
-        $query = "SELECT MAX(price) as highestPrice FROM " . self::TABLE . ";";
+        $query = "SELECT MAX(price) as highestPrice FROM {$this->table};";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
     public function lowestPrice()
     {
-        $query = "SELECT MIN(price) as lowestPrice FROM " . self::TABLE . ";";
+        $query = "SELECT MIN(price) as lowestPrice FROM {$this->table};";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -80,7 +81,7 @@ class Analytics
     public function lowestAveragePriceDistrict()
     {
         $query = "SELECT district, AVG(price) AS average_price
-            FROM " . self::TABLE . "
+            FROM {$this->table}
             GROUP BY district
             ORDER BY average_price ASC;";
 
@@ -91,7 +92,7 @@ class Analytics
     public function averageM2PriceByDistrict()
     {
         $query = "SELECT district, AVG(price / NULLIF(m2, 0)) AS average_m2_price_by_district
-        FROM listings
+        FROM {$this->table}
         WHERE m2 > 0
         GROUP BY district
         ORDER BY average_m2_price_by_district ASC;";

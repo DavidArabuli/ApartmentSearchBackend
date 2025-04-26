@@ -1,6 +1,7 @@
 <?php
 require '../models/Analytics.php';
 require '../services/Cache.php';
+require_once '../config/dbh.inc.php';
 
 class AnalyticsController
 {

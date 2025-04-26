@@ -3,7 +3,7 @@ require_once 'dbh.inc.php';
 class Selector
 {
     public $pdo;
-    public $title;
+
 
     public function __construct($pdo)
     {
@@ -59,30 +59,16 @@ class Selector
             if (count($conditions) > 0) {
                 $baseSelectQuery .= ' WHERE ' . implode(' AND ', $conditions);
             }
-            // -----
-            // $page_limit = !empty($params['page_limit']) ? $params['page_limit'] : 10;  
-            // $page = !empty($params['page']) ? $params['page'] : 1; // Default page is 1
-            // $offset = ($page - 1) * $page_limit;
 
-            // $baseSelectQuery .= " LIMIT :page_limit OFFSET :offset";
-            // $bindings[':page_limit'] = $page_limit;
-            // $bindings[':offset'] = $offset;
-
-            // -------
             // Prepare and execute the query
             $stmt = $this->pdo->prepare($baseSelectQuery);
             $stmt->execute($bindings);
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            // echo '<pre>';
 
-            // var_dump($results);
-            // echo '</pre>';
-            // $numberOfEntries = count($results);
-            // echo $numberOfEntries;
             return $results;
         } catch (PDOException $e) {
             // $e->getMessage();
-            $this->title = ['error' => $e->getMessage()];
+            die('Error creating table: ' . $e->getMessage());
         }
     }
 }
