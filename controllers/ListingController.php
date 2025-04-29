@@ -1,5 +1,5 @@
 <?php
-require '../validation/RequestValidation.php';
+require_once '../validation/RequestValidation.php';
 class ListingController
 {
 
