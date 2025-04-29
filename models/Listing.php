@@ -25,13 +25,13 @@ class Listing
             $bindings = [];
 
 
-            if (!empty($params['istabas'])) {
-                $conditions[] = "istabas = :istabas";
-                $bindings[':istabas'] = $params['istabas'];
+            if (!empty($params['rooms'])) {
+                $conditions[] = "rooms = :rooms";
+                $bindings[':rooms'] = $params['rooms'];
             }
-            if (!empty($params['pagasts'])) {
-                $conditions[] = "pagasts = :pagasts";
-                $bindings[':pagasts'] = $params['pagasts'];
+            if (!empty($params['district'])) {
+                $conditions[] = "district = :district";
+                $bindings[':district'] = $params['district'];
             }
             if (!empty($params['m2_min'])) {
                 $conditions[] = "m2 > :m2_min";
@@ -41,23 +41,23 @@ class Listing
                 $conditions[] = "m2 < :m2_max";
                 $bindings[':m2_max'] = $params['m2_max'];
             }
-            if (!empty($params['cena_min'])) {
-                $cena_min = preg_replace('/[^\d.]/', '', $params['cena_min']);
-                $conditions[] = "cena > :cena_min";
-                $bindings[':cena_min'] = $cena_min;
+            if (!empty($params['price_min'])) {
+                $price_min = preg_replace('/[^\d.]/', '', $params['price_min']);
+                $conditions[] = "price > :price_min";
+                $bindings[':price_min'] = $price_min;
             }
-            if (!empty($params['cena_max'])) {
-                $cena_max = preg_replace('/[^\d.]/', '', $params['cena_max']);
-                $conditions[] = "cena < :cena_max";
-                $bindings[':cena_max'] = $cena_max;
+            if (!empty($params['price_max'])) {
+                $price_max = preg_replace('/[^\d.]/', '', $params['price_max']);
+                $conditions[] = "price < :price_max";
+                $bindings[':price_max'] = $price_max;
             }
-            if (!empty($params['stavs_min'])) {
-                $conditions[] = "substr(stavs, 1, instr(stavs, '/') - 1) >= :stavs_min";
-                $bindings[':stavs_min'] = $params['stavs_min'];
+            if (!empty($params['floor_min'])) {
+                $conditions[] = "substr(floor, 1, instr(floor, '/') - 1) >= :floor_min";
+                $bindings[':floor_min'] = $params['floor_min'];
             }
-            if (!empty($params['stavs_max'])) {
-                $conditions[] = "substr(stavs, 1, instr(stavs, '/') - 1) <= :stavs_max";
-                $bindings[':stavs_max'] = $params['stavs_max'];
+            if (!empty($params['floor_max'])) {
+                $conditions[] = "substr(floor, 1, instr(floor, '/') - 1) <= :floor_max";
+                $bindings[':floor_max'] = $params['floor_max'];
             }
 
 
@@ -86,19 +86,19 @@ class Listing
         // global $pdo;
         try {
 
-            $query = "INSERT INTO " . $this->table . " (title, imgSrc, district, floor, series, price, m2, rooms, street, pubDate, link, hash) VALUES (:title, :imgSrc, :pagasts, :stavs, :serija, :cena, :m2, :istabas, :iela, :pubDate, :link, :hash);";
+            $query = "INSERT INTO " . $this->table . " (title, imgSrc, district, floor, series, price, m2, rooms, street, pubDate, link, hash) VALUES (:title, :imgSrc, :district, :floor, :series, :price, :m2, :rooms, :street, :pubDate, :link, :hash);";
 
             $stmt = $this->pdo->prepare($query);
 
             $stmt->bindParam(":title", $data['title']);
             $stmt->bindParam(":imgSrc", $data['imgSrc']);
-            $stmt->bindParam(":pagasts", $data['pagasts']);
-            $stmt->bindParam(":stavs", $data['stavs']);
-            $stmt->bindParam(":serija", $data['serija']);
-            $stmt->bindParam(":cena", $data['cena']);
+            $stmt->bindParam(":district", $data['district']);
+            $stmt->bindParam(":floor", $data['floor']);
+            $stmt->bindParam(":series", $data['series']);
+            $stmt->bindParam(":price", $data['price']);
             $stmt->bindParam(":m2", $data['m2']);
-            $stmt->bindParam(":istabas", $data['istabas']);
-            $stmt->bindParam(":iela", $data['iela']);
+            $stmt->bindParam(":rooms", $data['rooms']);
+            $stmt->bindParam(":street", $data['street']);
             $stmt->bindParam(":pubDate", $data['pubDate']);
             $stmt->bindParam(":link", $data['link']);
             $stmt->bindParam(":hash", $data['hash']);

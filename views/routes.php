@@ -1,5 +1,6 @@
 <?php
 require_once '../controllers/DistrictsController.php';
+require_once '../controllers/ListingController.php';
 require_once '../controllers/AnalyticsController.php';
 require_once '../controllers/FeedController.php';
 require_once '../config/dbh.inc.php';
@@ -22,5 +23,5 @@ $router->get('/feed', function () use ($pdo) {
 });
 $router->get('/api', function () use ($pdo) {
     $controller = new ListingController($pdo);
-    $controller->filter($_GET);
+    $controller->index();
 });
