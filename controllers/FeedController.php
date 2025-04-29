@@ -27,7 +27,7 @@ class FeedController
 
         foreach ($listings as $listing) {
 
-            (new Listing($listing, $this->pdo))->insertInDb();
+            (new Listing($this->pdo))->insertInDb($listing);
         }
     }
 }

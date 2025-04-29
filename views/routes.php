@@ -20,3 +20,7 @@ $router->get('/feed', function () use ($pdo) {
     $controller = new FeedController($pdo);
     $controller->updateFeed('../data.xml');
 });
+$router->get('/api', function () use ($pdo) {
+    $controller = new ListingController($pdo);
+    $controller->filter($_GET);
+});

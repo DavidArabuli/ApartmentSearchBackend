@@ -77,6 +77,7 @@ class Listing
         }
     }
 
+
     public function insertInDb(array $data)
     {
         // require_once "dbh.inc.php";
