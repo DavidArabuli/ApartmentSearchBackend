@@ -17,7 +17,7 @@ class RequestValidation
     }
     public static function validatePagination(array $queryParams): array
     {
-        $limit = max(1, min(100, (int)($queryParams['page_limit'] ?? 4)));
+        $limit = max(1, min(100, (int)($queryParams['page_limit'] ?? 20)));
         $page = max(1, (int)($queryParams['page'] ?? 1));
 
         return ['page_limit' => $limit, 'page' => $page];

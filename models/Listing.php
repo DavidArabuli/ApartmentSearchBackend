@@ -73,17 +73,15 @@ class Listing
             return $results;
         } catch (PDOException $e) {
             // $e->getMessage();
-            die('Error creating table: ' . $e->getMessage());
+            // die('Error creating table: ' . $e->getMessage());
+            throw new RuntimeException("Query failed: " . $e->getMessage());
         }
     }
 
 
     public function insertInDb(array $data)
     {
-        // require_once "dbh.inc.php";
-        require_once __DIR__ . '/../config/dbh.inc.php';
 
-        // global $pdo;
         try {
 
             $query = "INSERT INTO " . $this->table . " (title, imgSrc, district, floor, series, price, m2, rooms, street, pubDate, link, hash) VALUES (:title, :imgSrc, :district, :floor, :series, :price, :m2, :rooms, :street, :pubDate, :link, :hash);";
@@ -103,10 +101,6 @@ class Listing
             $stmt->bindParam(":link", $data['link']);
             $stmt->bindParam(":hash", $data['hash']);
             $stmt->execute();
-
-            // $pdo = null;
-            // $stmt = null;
-            // die();
         } catch (PDOException $e) {
             $errorCode = $e->getCode();
 
@@ -114,7 +108,8 @@ class Listing
                 echo 'Entry with this hash already exists in DB';
             } else {
 
-                die("Query failed: " . $e->getMessage());
+                // die("Query failed: " . $e->getMessage());
+                throw new RuntimeException("Query failed: " . $e->getMessage());
             }
         }
     }

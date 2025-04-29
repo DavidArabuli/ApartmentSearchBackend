@@ -21,7 +21,7 @@ $router->get('/feed', function () use ($pdo) {
     $controller = new FeedController($pdo);
     $controller->updateFeed('../data.xml');
 });
-$router->get('/api', function () use ($pdo) {
+$router->get('/api/listings', function () use ($pdo) {
     $controller = new ListingController($pdo);
     $controller->index();
 });
