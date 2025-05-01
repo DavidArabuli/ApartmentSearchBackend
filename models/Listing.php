@@ -90,13 +90,13 @@ class Listing
 
             $stmt->bindParam(":title", $data['title']);
             $stmt->bindParam(":imgSrc", $data['imgSrc']);
-            $stmt->bindParam(":district", $data['district']);
-            $stmt->bindParam(":floor", $data['floor']);
-            $stmt->bindParam(":series", $data['series']);
-            $stmt->bindParam(":price", $data['price']);
+            $stmt->bindParam(":district", $data['pagasts']);
+            $stmt->bindParam(":floor", $data['stavs']);
+            $stmt->bindParam(":series", $data['serija']);
+            $stmt->bindParam(":price", $data['cena']);
             $stmt->bindParam(":m2", $data['m2']);
-            $stmt->bindParam(":rooms", $data['rooms']);
-            $stmt->bindParam(":street", $data['street']);
+            $stmt->bindParam(":rooms", $data['istabas']);
+            $stmt->bindParam(":street", $data['iela']);
             $stmt->bindParam(":pubDate", $data['pubDate']);
             $stmt->bindParam(":link", $data['link']);
             $stmt->bindParam(":hash", $data['hash']);
