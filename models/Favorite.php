@@ -24,6 +24,14 @@ class Favorite
             $conditions = [];
             $bindings = [];
 
+            if (!empty($params['id'])) {
+                $conditions[] = "id = :id";
+                $bindings[':id'] = $params['id'];
+            }
+            if (!empty($params['email'])) {
+                $conditions[] = "email = :email";
+                $bindings[':email'] = $params['email'];
+            }
 
             if (!empty($params['rooms'])) {
                 $conditions[] = "rooms = :rooms";
@@ -83,13 +91,14 @@ class Favorite
         try {
 
             $query = "INSERT INTO " . $this->table . " 
-            (district, floor_min, floor_max, series, price_min, price_max, m2_min, m2_max, rooms, street, hash) 
+            (email, district, floor_min, floor_max, series, price_min, price_max, m2_min, m2_max, rooms, street, hash) 
             VALUES 
-            (:district, :floor_min, :floor_max, :series, :price_min, :price_max, :m2_min, :m2_max, :rooms, :street, :hash);";
+            (:email, :district, :floor_min, :floor_max, :series, :price_min, :price_max, :m2_min, :m2_max, :rooms, :street, :hash);";
 
             $stmt = $this->pdo->prepare($query);
 
             $stmt->bindParam(":district", $data['district']);
+            $stmt->bindParam(":email", $data['email']);
             $stmt->bindParam(":floor_min", $data['floor_min']);
             $stmt->bindParam(":floor_max", $data['floor_max']);
             $stmt->bindParam(":series", $data['series']);

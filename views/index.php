@@ -8,6 +8,7 @@
 </head>
 
 <body>
+    <a href="/api">api</a>
     <h1>HOME</h1>
 </body>
 
