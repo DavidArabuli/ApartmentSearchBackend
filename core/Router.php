@@ -35,29 +35,38 @@ class Router
             $pattern = "#^" . $pattern . "$#";
 
             if (preg_match($pattern, $requestUri, $matches) && strtoupper($method) === $route['method']) {
-                array_shift($matches); // Remove the full match
-                return call_user_func_array($route['action'], $matches);
+                array_shift($matches); // Remove full match
+
+                if (is_callable($route['action'])) {
+                    return call_user_func_array($route['action'], $matches);
+                }
+
+                // Support for including PHP files like '/index.php'
+                if (is_string($route['action']) && file_exists(__DIR__ . '/../views' . $route['action'])) {
+                    return require __DIR__ . '/../views' . $route['action'];
+                }
+
+                throw new InvalidArgumentException("Invalid route action: " . $route['action']);
             }
         }
 
         $this->abort();
     }
-
-    // public function route($uri, $method)
+    // public function route($requestUri, $method)
     // {
     //     foreach ($this->routes as $route) {
-    //         if ($route['uri'] === $uri && $route['method'] === strtoupper($method))
-    //         // if (strpos($uri, $route['uri']) === 0 && $route['method'] === strtoupper($method)) 
-    //         {
-    //             if (is_callable($route['action'])) {
-    //                 return $route['action']();
-    //             }
+    //         $pattern = preg_replace('#:([\w]+)#', '([\w-]+)', $route['uri']);
+    //         $pattern = "#^" . $pattern . "$#";
 
-    //             return require '../controllers/' . $route['action'];
+    //         if (preg_match($pattern, $requestUri, $matches) && strtoupper($method) === $route['method']) {
+    //             array_shift($matches); // Remove the full match
+    //             return call_user_func_array($route['action'], $matches);
     //         }
     //     }
+
     //     $this->abort();
     // }
+
 
     public function abort($code = 404)
     {
@@ -66,3 +75,19 @@ class Router
         die();
     }
 }
+
+// public function route($uri, $method)
+// {
+//     foreach ($this->routes as $route) {
+//         if ($route['uri'] === $uri && $route['method'] === strtoupper($method))
+//         // if (strpos($uri, $route['uri']) === 0 && $route['method'] === strtoupper($method)) 
+//         {
+//             if (is_callable($route['action'])) {
+//                 return $route['action']();
+//             }
+
+//             return require '../controllers/' . $route['action'];
+//         }
+//     }
+//     $this->abort();
+// }

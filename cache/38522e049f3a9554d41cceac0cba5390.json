@@ -1,9 +1,9 @@
 {
     "averageM2": {
-        "averageM2": 62.48
+        "averageM2": 63.17
     },
     "averagePrice": {
-        "averagePrice": 105443.82
+        "averagePrice": 106215.38
     },
     "highestPrice": {
         "highestPrice": 386000
@@ -11,11 +11,11 @@
     "lowestPrice": {
         "lowestPrice": 22000
     },
-    "averageM2Price": 1632.57,
+    "averageM2Price": 1612.83,
     "mostSalesDistrict": [
         {
             "district": "centrs",
-            "offer_count": 26
+            "offer_count": 25
         },
         {
             "district": "Imanta",
@@ -153,7 +153,7 @@
         },
         {
             "district": "centrs",
-            "average_price": "117497.8077"
+            "average_price": "119831.7200"
         },
         {
             "district": "Zolitūde",
@@ -231,7 +231,7 @@
         },
         {
             "district": "centrs",
-            "average_m2_price_by_district": 1764.682042675226
+            "average_m2_price_by_district": 1722.6026577155683
         },
         {
             "district": "Krasta r-ns",
