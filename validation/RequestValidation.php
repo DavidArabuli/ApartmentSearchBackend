@@ -1,5 +1,5 @@
 <?php
-
+// validation for query params
 class RequestValidation
 {
     public static function validateQuery(array $queryParams)
@@ -21,16 +21,6 @@ class RequestValidation
             'floor_min' => self::sanitizeInt($queryParams['floor_min'] ?? null),
             'floor_max' => self::sanitizeInt($queryParams['floor_max'] ?? null),
         ];
-        // return [
-        //     'rooms' => filter_var($queryParams['rooms'] ?? null, FILTER_VALIDATE_INT),
-        //     'district' => isset($queryParams['district']) ? htmlspecialchars($queryParams['district'], ENT_QUOTES, 'UTF-8') : null,
-        //     'm2_min' => filter_var($queryParams['m2_min'] ?? null, FILTER_VALIDATE_INT),
-        //     'm2_max' => filter_var($queryParams['m2_max'] ?? null, FILTER_VALIDATE_INT),
-        //     'price_min' => filter_var($queryParams['price_min'] ?? null, FILTER_VALIDATE_INT),
-        //     'price_max' => filter_var($queryParams['price_max'] ?? null, FILTER_VALIDATE_INT),
-        //     'floor_min' => filter_var($queryParams['floor_min'] ?? null, FILTER_VALIDATE_INT),
-        //     'floor_max' => filter_var($queryParams['floor_max'] ?? null, FILTER_VALIDATE_INT),
-        // ];
     }
     public static function validatePagination(array $queryParams): array
     {

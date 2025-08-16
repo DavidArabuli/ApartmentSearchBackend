@@ -31,10 +31,10 @@ $router->post('/api/notify', function () use ($pdo) {
     $controller = new FavoriteController($pdo);
     $controller->registerFavorite();
 });
-$router->get('/api/notify/:id', function ($id) use ($pdo) {
-    $controller = new FavoriteController($pdo);
-    $controller->show($id);
-});
+// $router->get('/api/notify/:id', function ($id) use ($pdo) {
+//     $controller = new FavoriteController($pdo);
+//     $controller->show($id);
+// });
 
 // $router->get("/api/notify", function () use ($pdo) {
 //     $uri = $_SERVER['REQUEST_URI'];
