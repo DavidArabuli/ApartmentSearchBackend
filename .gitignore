@@ -1,6 +1,7 @@
 # Logs
 logs
 *.log
+.env
 env.php
 npm-debug.log*
 yarn-debug.log*
@@ -13,6 +14,9 @@ node_modules
 dist
 dist-ssr
 *.local
+
+# PHP dependencies
+/vendor/
 
 # Editor directories and files
 .vscode/*

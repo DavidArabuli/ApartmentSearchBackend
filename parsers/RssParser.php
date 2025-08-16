@@ -1,4 +1,7 @@
 <?php
+
+// SS.lv RSS feed parser
+
 function dd($data)
 {
     echo '<pre>';
@@ -109,6 +112,7 @@ class RssParser
             $data['hash'] = $this->createHash($title, $pubDate);
             $items[] = $data;
         }
+        // dd($items);
         return $items;
 
         /**
@@ -121,6 +125,7 @@ class RssParser
         $hashedValue = hash('crc32', $data);
         return $hashedValue;
     }
+    // helper func to extract specific items
     public function extractValue($line, $key)
     {
         $pos = strpos($line, $key);

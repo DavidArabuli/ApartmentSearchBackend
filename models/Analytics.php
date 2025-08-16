@@ -36,7 +36,7 @@ class Analytics
         $averagePricePerSquareMeter = $result['averageM2Price'];
         return $averagePricePerSquareMeter;
     }
-    // average appartement price in DB
+    // average apartement price in DB
     public function averagePrice()
     {
         $query = "SELECT price FROM {$this->table};";
@@ -67,6 +67,7 @@ class Analytics
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    // number of offers per district
     public function listSalesDistrict()
     {
         $query = "SELECT district, COUNT(*) AS offer_count
@@ -78,6 +79,7 @@ class Analytics
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
     public function lowestAveragePriceDistrict()
     {
         $query = "SELECT district, AVG(price) AS average_price
@@ -89,6 +91,7 @@ class Analytics
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
     public function averageM2PriceByDistrict()
     {
         $query = "SELECT district, AVG(price / NULLIF(m2, 0)) AS average_m2_price_by_district

@@ -1,8 +1,9 @@
 <?php
+
 require_once '../controllers/DistrictsController.php';
 require_once '../controllers/ListingController.php';
 require_once '../controllers/AnalyticsController.php';
-require_once '../controllers/NotificationController.php';
+require_once '../controllers/FavoriteController.php';
 require_once '../controllers/FeedController.php';
 require_once '../config/dbh.inc.php';
 
@@ -26,12 +27,12 @@ $router->get('/api/listings', function () use ($pdo) {
     $controller = new ListingController($pdo);
     $controller->index();
 });
-$router->get('/api/notify', function () use ($pdo) {
-    $controller = new NotificationController($pdo);
+$router->post('/api/notify', function () use ($pdo) {
+    $controller = new FavoriteController($pdo);
     $controller->registerFavorite();
 });
 $router->get('/api/notify/:id', function ($id) use ($pdo) {
-    $controller = new NotificationController($pdo);
+    $controller = new FavoriteController($pdo);
     $controller->show($id);
 });
 

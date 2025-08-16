@@ -8,7 +8,10 @@
 </head>
 
 <body>
-    <a href="/api">api</a>
+    <a href="/feed">feed</a>
+    <a href="/api/listings">listings</a>
+    <a href="/api/districts">districts</a>
+    <a href="/api/analytics">analytics</a>
     <h1>HOME</h1>
 </body>
 

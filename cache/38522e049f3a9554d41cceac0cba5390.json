@@ -11,7 +11,9 @@
     "lowestPrice": {
         "lowestPrice": 22000
     },
-    "averageM2Price": 1612.83,
+    "averageM2Price": {
+        "averageM2Price": 1612.83
+    },
     "mostSalesDistrict": [
         {
             "district": "centrs",
