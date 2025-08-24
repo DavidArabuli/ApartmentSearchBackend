@@ -3,14 +3,12 @@
 class Listing
 {
     private $table;
-    // private $data;
     private $pdo;
 
 
 
     public function __construct(PDO $pdo, string $table = 'listings')
     {
-        // $this->data = $data;
         $this->pdo = $pdo;
         $this->table = $table;
     }
@@ -72,8 +70,6 @@ class Listing
 
             return $results;
         } catch (PDOException $e) {
-            // $e->getMessage();
-            // die('Error creating table: ' . $e->getMessage());
             throw new RuntimeException("Query failed: " . $e->getMessage());
         }
     }
@@ -90,13 +86,13 @@ class Listing
 
             $stmt->bindParam(":title", $data['title']);
             $stmt->bindParam(":imgSrc", $data['imgSrc']);
-            $stmt->bindParam(":district", $data['pagasts']);
-            $stmt->bindParam(":floor", $data['stavs']);
-            $stmt->bindParam(":series", $data['serija']);
-            $stmt->bindParam(":price", $data['cena']);
+            $stmt->bindParam(":district", $data['district']);
+            $stmt->bindParam(":floor", $data['floor']);
+            $stmt->bindParam(":series", $data['series']);
+            $stmt->bindParam(":price", $data['price']);
             $stmt->bindParam(":m2", $data['m2']);
-            $stmt->bindParam(":rooms", $data['istabas']);
-            $stmt->bindParam(":street", $data['iela']);
+            $stmt->bindParam(":rooms", $data['rooms']);
+            $stmt->bindParam(":street", $data['street']);
             $stmt->bindParam(":pubDate", $data['pubDate']);
             $stmt->bindParam(":link", $data['link']);
             $stmt->bindParam(":hash", $data['hash']);
@@ -108,7 +104,7 @@ class Listing
                 echo 'Entry with this hash already exists in DB';
             } else {
 
-                // die("Query failed: " . $e->getMessage());
+
                 throw new RuntimeException("Query failed: " . $e->getMessage());
             }
         }

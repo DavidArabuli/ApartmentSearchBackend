@@ -3,16 +3,27 @@
 class Favorite
 {
     private $table;
-    // private $data;
     private $pdo;
 
 
 
     public function __construct(PDO $pdo, string $table = 'favorites')
     {
-        // $this->data = $data;
+
         $this->pdo = $pdo;
         $this->table = $table;
+    }
+    public function getAll(): array
+    {
+        try {
+            $query = "SELECT * FROM {$this->table}";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            throw new RuntimeException("Failed to fetch favorites: " . $e->getMessage());
+        }
     }
 
     public function select(array $params)
@@ -73,21 +84,42 @@ class Favorite
                 $baseSelectQuery .= ' WHERE ' . implode(' AND ', $conditions);
             }
 
-            // Prepare and execute the query
+
             $stmt = $this->pdo->prepare($baseSelectQuery);
             $stmt->execute($bindings);
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             return $results;
         } catch (PDOException $e) {
-            // $e->getMessage();
-            // die('Error creating table: ' . $e->getMessage());
+
             throw new RuntimeException("Query failed: " . $e->getMessage());
         }
     }
-    public function insertInDb(array $data)
+    private function generateHash(array $data): string
     {
 
+        ksort($data);
+
+
+        $hashData = [
+            'email' => $data['email'] ?? '',
+            'district' => $data['district'] ?? '',
+            'floor_min' => $data['floor_min'] ?? '',
+            'floor_max' => $data['floor_max'] ?? '',
+            'series' => $data['series'] ?? '',
+            'price_min' => $data['price_min'] ?? '',
+            'price_max' => $data['price_max'] ?? '',
+            'm2_min' => $data['m2_min'] ?? '',
+            'm2_max' => $data['m2_max'] ?? '',
+            'rooms' => $data['rooms'] ?? '',
+            'street' => $data['street'] ?? '',
+        ];
+
+        return substr(md5(json_encode($hashData)), 0, 8);
+    }
+    public function insertInDb(array $data)
+    {
+        $data['hash'] = $this->generateHash($data);
         try {
 
             $query = "INSERT INTO " . $this->table . " 
@@ -111,15 +143,26 @@ class Favorite
             $stmt->bindParam(":hash", $data['hash']);
             $stmt->execute();
         } catch (PDOException $e) {
-            $errorCode = $e->getCode();
 
-            if ($errorCode === '23000' || $errorCode === 23000) {
-                echo 'Entry with this hash already exists in DB';
+            $errorInfo = $e->errorInfo;
+
+            if ($e->getCode() === '23000' && isset($errorInfo[1]) && $errorInfo[1] == 1062) {
+                http_response_code(409);
+                header('Content-Type: application/json');
+                echo json_encode([
+                    "error" => true,
+                    "duplicate" => true,
+                    "message" => "This favorite already exists."
+                ]);
             } else {
-
-                // die("Query failed: " . $e->getMessage());
-                throw new RuntimeException("Query failed: " . $e->getMessage());
+                http_response_code(500);
+                header('Content-Type: application/json');
+                echo json_encode([
+                    "error" => true,
+                    "message" => $e->getMessage()
+                ]);
             }
+            exit;
         }
     }
 }

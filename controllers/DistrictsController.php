@@ -3,7 +3,6 @@
 
 require_once '../config/dbh.inc.php';
 
-// echo 'hey from API controller';
 class DistrictsController
 {
 
@@ -13,23 +12,6 @@ class DistrictsController
         $this->pdo = $pdo;
     }
 
-    // public function getAnalytics()
-    // {
-    //     header("Access-Control-Allow-Origin: *");
-    //     header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-    //     header("Access-Control-Allow-Headers: Content-Type");
-    //     header('Content-Type: application/json; charset=utf-8');
-
-    //     try {
-    //     } catch (Exception $e) {
-    //         http_response_code(500);
-    //         echo json_encode([
-    //             'status' => 'error',
-    //             'message' => 'failed to fetch analytics',
-    //             'error' => $e->getMessage()
-    //         ]);
-    //     }
-    // }
     public function show()
     {
         header("Access-Control-Allow-Origin: *");
@@ -38,7 +20,6 @@ class DistrictsController
         header('Content-Type: application/json; charset=utf-8');
         try {
 
-            // echo 'hey from districts';
             $query = "SELECT district FROM listings;";
             $stmt = $this->pdo->prepare($query);
             $stmt->execute();
@@ -46,9 +27,6 @@ class DistrictsController
             $districtArray = array_column($results, 'district');
             $uniqueResults = array_unique($districtArray);
 
-
-            // print_r($uniqueResults);
-            // echo json_encode($uniqueResults);
             echo json_encode([
                 'status' => 'success',
                 'data' => $uniqueResults

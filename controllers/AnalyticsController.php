@@ -28,7 +28,6 @@ class AnalyticsController
             'averagePrice' =>  $this->analytics->averagePrice(),
             'highestPrice' =>  $this->analytics->highestPrice(),
             'lowestPrice' =>  $this->analytics->lowestPrice(),
-            // 'averageM2Price' =>   round($this->analytics->averageM2Price(), 2),
             'averageM2Price' => ['averageM2Price' => round($this->analytics->averageM2Price(), 2)],
             'mostSalesDistrict' =>  $this->analytics->listSalesDistrict(),
             'lowestAveragePriceDistrict' =>  $this->analytics->lowestAveragePriceDistrict(),

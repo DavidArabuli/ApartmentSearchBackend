@@ -35,24 +35,21 @@ class RssParser
             $pubDate = (new DateTime($pubDateRaw))->format('Y-m-d H:i:s');
             // $pubDate = $row->getElementsByTagName("pubDate")->item(0)->nodeValue;
             $link = $row->getElementsByTagName("link")->item(0)->nodeValue;
-
+            echo '<pre>';
+            var_dump($link);
+            echo '</pre>';
             // Replace <br> and <br/> with newlines - because of specifics of description field
             $description = str_replace(['<br>', '<br/>'], "\n", $description);
 
             // Split description by newline characters
             $lines = explode("\n", $description);
-            // print_r($title);
-            echo '<pre>';
-            var_dump($lines);
-            echo '</pre>';
 
             $data = [
-                // 'description' => $description,
                 'title' => $title,
                 'pubDate' => $pubDate,
                 'link' => $link,
                 'pagasts' => '',
-                'stavs' => '',
+                'stavs' => null,
                 'serija' => '',
                 'cena' => '',
                 'm2' => '',
@@ -70,8 +67,16 @@ class RssParser
                     $data['pagasts'] = strip_tags(trim($this->extractValue($line, 'Pagasts:')));
                 }
                 if (strpos($line, 'Stāvs:') !== false) {
+                    $rawFloor = strip_tags(trim($this->extractValue($line, 'Stāvs:')));
 
-                    $data['stavs'] = strip_tags(trim($this->extractValue($line, 'Stāvs:')));
+                    if ($rawFloor === '') {
+                        $data['stavs'] = null;
+                    } elseif (strpos($rawFloor, '/') !== false) {
+                        [$current] = explode('/', $rawFloor, 2);
+                        $data['stavs'] = (int)trim($current);
+                    } else {
+                        $data['stavs'] = (int)$rawFloor;
+                    }
                 }
 
                 if (strpos($line, 'Sērija:') !== false) {
@@ -112,7 +117,11 @@ class RssParser
             $data['hash'] = $this->createHash($title, $pubDate);
             $items[] = $data;
         }
-        // dd($items);
+        echo '<pre>';
+        echo 'hey from parser item';
+        var_dump($items);
+        echo '</pre>';
+
         return $items;
 
         /**
