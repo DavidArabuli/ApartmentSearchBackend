@@ -1,11 +1,11 @@
 <?php
 
-require_once '../controllers/DistrictsController.php';
-require_once '../controllers/ListingController.php';
-require_once '../controllers/AnalyticsController.php';
-require_once '../controllers/FavoriteController.php';
-require_once '../controllers/FeedController.php';
-require_once '../config/dbh.inc.php';
+require_once __DIR__ . '/../controllers/DistrictsController.php';
+require_once __DIR__ . '/../controllers/ListingController.php';
+require_once __DIR__ . '/../controllers/AnalyticsController.php';
+require_once __DIR__ . '/../controllers/FavoriteController.php';
+require_once __DIR__ . '/../controllers/FeedController.php';
+require_once __DIR__ . '/../config/dbh.inc.php';
 
 $router->get('/', '/index.php');
 

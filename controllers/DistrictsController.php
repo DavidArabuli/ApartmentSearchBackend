@@ -1,7 +1,7 @@
 <?php
 
 
-require_once '../config/dbh.inc.php';
+require_once __DIR__ . '/../config/dbh.inc.php';
 
 class DistrictsController
 {

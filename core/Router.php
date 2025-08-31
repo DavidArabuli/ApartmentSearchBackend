@@ -1,7 +1,5 @@
 <?php
 
-// require '../controllers/APIController.php';
-
 class Router
 {
 
@@ -35,13 +33,13 @@ class Router
             $pattern = "#^" . $pattern . "$#";
 
             if (preg_match($pattern, $requestUri, $matches) && strtoupper($method) === $route['method']) {
-                array_shift($matches); // Remove full match
+                array_shift($matches);
 
                 if (is_callable($route['action'])) {
                     return call_user_func_array($route['action'], $matches);
                 }
 
-                // Support for including PHP files like '/index.php'
+
                 if (is_string($route['action']) && file_exists(__DIR__ . '/../views' . $route['action'])) {
                     return require __DIR__ . '/../views' . $route['action'];
                 }

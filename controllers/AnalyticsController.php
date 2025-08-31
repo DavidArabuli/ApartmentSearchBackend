@@ -1,7 +1,8 @@
 <?php
-require '../models/Analytics.php';
-require '../services/Cache.php';
-require_once '../config/dbh.inc.php';
+
+require_once __DIR__ . '/../models/Analytics.php';
+require_once __DIR__ . '/../services/Cache.php';
+require_once __DIR__ . '/../config/dbh.inc.php';
 
 class AnalyticsController
 {

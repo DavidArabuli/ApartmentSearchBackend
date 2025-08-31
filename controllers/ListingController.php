@@ -1,5 +1,5 @@
 <?php
-require_once '../validation/RequestValidation.php';
+require_once __DIR__ . '/../validation/RequestValidation.php';
 class ListingController
 {
 
