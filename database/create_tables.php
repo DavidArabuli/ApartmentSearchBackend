@@ -1,6 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../config/dbh.inc.php';
+// require_once __DIR__ . '/../config/dbh.inc.php';
+$pdo = require_once __DIR__ . '/../config/dbh.inc.php';
 
 
 $sql = "CREATE TABLE IF NOT EXISTS listings (

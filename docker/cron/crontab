@@ -1,0 +1,1 @@
+*/1 * * * * /usr/bin/curl -s http://app_prod/feed >> /var/log/cron.log 2>&1

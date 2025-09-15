@@ -1,0 +1,10 @@
+.git
+.gitignore
+node_modules
+vendor
+cache/*.json
+docker/db/*.sql
+docker/db/*.dump
+# .env
+.env2
+.DS_Store

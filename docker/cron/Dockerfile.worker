@@ -1,0 +1,56 @@
+FROM debian:stable-slim
+
+RUN apt-get update && apt-get install -y cron curl procps vim less \
+    && rm -rf /var/lib/apt/lists/*
+
+    
+WORKDIR /app
+
+# Copy crontab
+COPY docker/cron/crontab /tmp/crontab
+RUN crontab /tmp/crontab && rm /tmp/crontab
+
+# Ensure log exists
+RUN touch /var/log/cron.log && chmod 666 /var/log/cron.log
+
+# Start cron in foreground (will run the root user’s crontab)
+CMD ["cron", "-f"]
+
+# FROM debian:stable-slim
+
+# RUN apt-get update && apt-get install -y cron curl procps vim less \
+#     && rm -rf /var/lib/apt/lists/*
+
+    
+# WORKDIR /app
+
+# # Copy crontab
+# COPY docker/cron/crontab /etc/cron.d/app-cron
+# RUN chmod 0644 /etc/cron.d/app-cron
+
+# # Ensure log exists
+# RUN touch /var/log/cron.log && chmod 666 /var/log/cron.log
+
+# # Start cron in foreground (cron will automatically read /etc/cron.d/app-cron)
+# CMD ["cron", "-f"]
+
+
+
+
+# FROM debian:stable-slim
+
+# # Install cron, curl, and procps (for ps, top, etc.)
+# RUN apt-get update && apt-get install -y cron curl procps vim less \
+#     && rm -rf /var/lib/apt/lists/*
+
+# WORKDIR /app
+
+# # Add your crontab
+# COPY docker/cron/crontab /etc/cron.d/app-cron
+# RUN chmod 0644 /etc/cron.d/app-cron
+
+# # Ensure log file exists so cron can write into it
+# RUN touch /var/log/cron.log
+
+# # Start cron in foreground
+# CMD ["cron", "-f"]
