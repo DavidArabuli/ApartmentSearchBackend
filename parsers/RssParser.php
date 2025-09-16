@@ -96,9 +96,10 @@ class RssParser
                 }
 
 
-                if (strpos($line, 'm2:') !== false) {
+                if (strpos($line, 'm2:') !== false || strpos($line, 'm²:') !== false) {
 
-                    $data['m2'] = strip_tags(trim($this->extractValue($line, 'm2:')));
+                    $key = strpos($line, 'm2:') !== false ? 'm2:' : 'm²:';
+                    $data['m2'] = strip_tags(trim($this->extractValue($line, $key)));
                 }
                 if (strpos($line, 'Ist.:') !== false) {
 

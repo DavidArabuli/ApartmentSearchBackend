@@ -2,6 +2,7 @@
 
 
 // https://www.ss.lv/lv/real-estate/flats/riga/sell/rss/
+// $feed_url = "https://www.ss.lv/lv/real-estate/flats/riga/sell/rss/";
 $feed_url = "data.xml";
 
 ?>
